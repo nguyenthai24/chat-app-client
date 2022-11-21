@@ -1,8 +1,8 @@
 import React from 'react';
 import{Routes, Route} from 'react-router-dom';
-import Chat from './components/Chat';
-import Login from './components/Login';
-import Register from './components/Register';
+import Chat from './pages/Chat';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 export default function App() {
     return (
