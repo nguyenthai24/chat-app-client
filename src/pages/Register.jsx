@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -11,6 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Logo from '../assets/133.jpg';
 
 function Register() {
+    
+    let navigate = useNavigate()
+
     const [values, setValues] = useState({
         username: '',
         email: '',
@@ -27,6 +30,14 @@ function Register() {
                 email,
                 password,
             });
+            if(!data || data.status === false) {
+                toast.error(data.msg, toastOption)
+            }
+            if(data && data.status === true) {
+                localStorage.setItem('chat-app-user', JSON.stringify(data.user));
+            }
+
+            navigate('/home')
         }
     };
 
