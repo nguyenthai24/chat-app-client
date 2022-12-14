@@ -34,25 +34,29 @@ function SetAvatar() {
         // 👇️ get number between min (inclusive) and max (inclusive)
         return Math.floor(Math.random() * int + 1);
     }
+    useEffect(() => {
+        if(!localStorage.getItem('chat-app-user')) {
+            navigate('/login')
+        }
+    },[])
 
     const setProfilePicture = async () => {
-        console.log(selectedAvatar)
         if (selectedAvatar === undefined) {
             toast.error('Please selecet an avatar', toastOption);
         } else {
-            console.log(123)
+            
             const user = await JSON.parse(localStorage.getItem('chat-app-user'));
-            console.log(user)
-            const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+            const  {data}  = await axios.post(`${setAvatarRoute}/${user._id}`, {
                 image: avatars[selectedAvatar],
-            });
+            })
+            console.log(data)
             if(data.isSet) {
                 user.isAvatarImageSet = true;
                 user.avatarImage = data.image;
                 localStorage.setItem('chat-app-user', JSON.stringify(user));
-                navigate('/home')
+                navigate('/home');
             } else {
-                toast.error('Error setting avatar. Please try again', toastOption)
+                toast.error('Error setting avatar. Please try again', toastOption);
             }
         }
     };
@@ -61,7 +65,6 @@ function SetAvatar() {
             const data = [];
             for (let i = 0; i < 4; i++) {
                 const image = await axios.get(`${api}/${randomNumberInRange(1000)}`);
-                console.log(image);
                 const buffer = new Buffer(image.data);
                 data.push(buffer.toString('base64'));
             }

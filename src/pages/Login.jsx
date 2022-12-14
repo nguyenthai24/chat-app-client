@@ -33,7 +33,7 @@ function Login() {
                 username,
                 password,
             });
-            console.log(data);
+
             if (!data || data.status === false) {
                 toast.error(data.msg, toastOption);
             }
