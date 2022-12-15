@@ -10,19 +10,15 @@ import Contacts from '../components/Contacts';
 function Chat() {
     const navigate = useNavigate();
     const [contacts, setContacts] = useState([]);
-    const [currentUser, setCurrentUser] = useState(undefined);
+    const [currentUser, setCurrentUser] = useState(null);
 
     // Check user exist
     useEffect(() => {
-        
-        (async () => {
-            
-            if (!localStorage.getItem('chat-app-user')) {
-                navigate('/login');
-            } else {
-                setCurrentUser(await JSON.parse(localStorage.getItem('chat-app-user')));
-            }
-        })();
+        if (!localStorage.getItem('chat-app-user')) {
+            navigate('/login');
+        } else {
+            setCurrentUser(JSON.parse(localStorage.getItem('chat-app-user')));
+        }
     }, []);
 
     useEffect(() => {
@@ -30,7 +26,8 @@ function Chat() {
             if (currentUser) {
                 if (currentUser.isAvatarImageSet) {
                     const { data } = await axios.get(`${allUserRoute}/${currentUser._id}`);
-                    setContacts(data);
+
+                    setContacts(data.users);
                 } else {
                     navigate('/set-avatar');
                 }
