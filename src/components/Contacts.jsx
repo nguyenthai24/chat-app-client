@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Buffer } from 'buffer';
 import Logo from '../assets/133.jpg';
 
 function Contacts({ contacts, currentUser }) {
@@ -14,47 +13,47 @@ function Contacts({ contacts, currentUser }) {
             setCurrentUserName(currentUser.username);
         }
     }, [currentUser]);
-    console.log(contacts);
+
     const changCurrentChat = (index, contact) => {};
 
     return (
         <>
             {currentUserImage && currentUserName && (
                 <Container>
-                    <div className="brand">
-                        <img src={Logo} alt="logo" />
-                        <h3>snappy</h3>
-                    </div>
-                    <div className="contacts">
-                        {contacts.map((contact, index) => {
-                            return (
-                                <>
-                                    <div
-                                        className={`contact ${index === currentSelected ? 'selected' : "''"}`}
-                                        key={index}
-                                    >
-                                        <div className="avatar">
-                                            <img
-                                                src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                                                alt="avatar"
-                                            />
-                                        </div>
-                                        <div className="username">
-                                            <h3>{contact.username}</h3>
-                                        </div>
-                                    </div>
-                                </>
-                            );
-                        })}
-                    </div>
-                    <div className="current-user">
-                        <div className="avatar">
-                            <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar" />
+                        <div className="brand">
+                            <img src={Logo} alt="logo" />
+                            <h3>snappy</h3>
                         </div>
-                        <div className="username">
-                            <h3>{setCurrentUserName}</h3>
+                        <div className="contacts">
+                            {contacts.map((contact, index) => {
+                                return (
+                                        <div
+                                            className={`contact ${index === currentSelected ? 'selected' : "''"}`}
+                                            key={index}
+                                        >
+                                            <div className="avatar">
+                                                <img
+                                                    src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                                    alt="avatar"
+                                                />
+                                            </div>
+                                            <div className="username">
+                                                <h3>{contact.username}</h3>
+                                            </div>
+                                        </div>
+
+                                );
+                            })}
                         </div>
-                    </div>
+                        <div className="current-user">
+                            <div className="avatar">
+                                <img src={`data:image/svg+xml;base64,${currentUserImage}`} alt="avatar" />
+                            </div>
+                            <div className="username">
+                                <h3>{currentSelected}</h3>
+                            </div>
+                        </div>
+                    
                 </Container>
             )}
         </>
@@ -63,7 +62,7 @@ function Contacts({ contacts, currentUser }) {
 
 const Container = styled.div`
     display: grid;
-    grid-template-columns: 10% 75% 15%;
+    grid-template-rows: 10% 75% 15%;
     overflow: hidden;
     background-color: #080420;
     .brand {
@@ -79,7 +78,7 @@ const Container = styled.div`
             text-transform: uppercase;
         }
     }
-    .cantacts {
+    .contacts {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -87,7 +86,19 @@ const Container = styled.div`
         gap: 0.8rem;
         .contact {
             background-color: #ffffff39;
+            height: 5rem;
+            width: 90%;
+            cursor: pointer;
+            border-radius: 0.2rem;
+            padding: 0.4rem;
+            .avatar {
+                img {
+                    height: 3rem;
+                }
+            }
+
         }
+       
     }
 `;
 
