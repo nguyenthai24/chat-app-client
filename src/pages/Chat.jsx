@@ -11,6 +11,7 @@ function Chat() {
     const navigate = useNavigate();
     const [contacts, setContacts] = useState([]);
     const [currentUser, setCurrentUser] = useState(null);
+    const [currentChat, setCurrentChat] = useState(null)
 
     // Check user exist
     useEffect(() => {
@@ -35,10 +36,14 @@ function Chat() {
         })();
     }, [currentUser]);
 
+    const handleChatChange = (chat) => {
+        setCurrentChat(chat)
+    }
+
     return (
         <Container>
             <div className="container">
-                <Contacts contacts={contacts} currentUser={currentUser} />
+                <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
             </div>
         </Container>
     );
