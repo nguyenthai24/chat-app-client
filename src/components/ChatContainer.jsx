@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {BiPowerOff} from 'react-icons/bi'
 import Logout from './Logout';
 import ChatInput from './ChatInput';
+import Message from './Message';
 
 function ChatContainer({ currentChat }) {
 
@@ -24,7 +25,7 @@ function ChatContainer({ currentChat }) {
                         </div>
                         <Logout/>
                     </div>
-                    <div className="chat-messages"></div>
+                    <Message/>
                     <ChatInput handSendMsg={handSendMsg} />
                 </Container>
             )}
