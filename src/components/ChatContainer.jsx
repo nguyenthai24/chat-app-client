@@ -8,7 +8,7 @@ import Message from './Message';
 
 function ChatContainer({ currentChat }) {
 
-    const handSendMsg = async (msg) => {}
+    const handleSendMsg = async (msg) => {console.log(1)}
 
     return (
         <>
@@ -26,7 +26,7 @@ function ChatContainer({ currentChat }) {
                         <Logout/>
                     </div>
                     <Message/>
-                    <ChatInput handSendMsg={handSendMsg} />
+                    <ChatInput handleSendMsg={handleSendMsg} />
                 </Container>
             )}
         </>
