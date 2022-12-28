@@ -19,7 +19,6 @@ function ChatInput({ handleSendMsg }) {
     };
 
     const sendChat = (event) => {
-        console.log(handleSendMsg)
         event.preventDefault();
         if (msg.length > 0) {
             handleSendMsg(msg);
@@ -37,7 +36,7 @@ function ChatInput({ handleSendMsg }) {
                     )}
                 </div>
             </div>
-            <form action="" className="input-container" onSubmit={(e) => sendChat(e)}>
+            <form action="" className="input-container" onSubmit={(event) => sendChat(event)}>
                 <input
                     type="text"
                     placeholder="Type your message here"

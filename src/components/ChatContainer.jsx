@@ -5,10 +5,23 @@ import {BiPowerOff} from 'react-icons/bi'
 import Logout from './Logout';
 import ChatInput from './ChatInput';
 import Message from './Message';
+import {sendMessageRoute, getAllMessageRoute} from '../utils/API_router'
+import { useEffect } from 'react';
 
-function ChatContainer({ currentChat }) {
 
-    const handleSendMsg = async (msg) => {console.log(1)}
+function ChatContainer({ currentChat, currentUser }) {
+
+    // useEffect(() => async ({
+       
+    // })(),[currentChat])
+
+    const handleSendMsg = async (msg) => {
+        await axios.post(sendMessageRoute, {
+            from: currentUser._id,
+            to: currentChat._id,
+            message: msg,
+        })
+    }
 
     return (
         <>
@@ -25,7 +38,7 @@ function ChatContainer({ currentChat }) {
                         </div>
                         <Logout/>
                     </div>
-                    <Message/>
+                    <div className="chat-messages"></div>
                     <ChatInput handleSendMsg={handleSendMsg} />
                 </Container>
             )}
