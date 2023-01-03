@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
-import { allUserRoute } from '../utils/API_router';
+import { allUserRoute, host } from '../utils/API_router';
+import {io} from 'socket.io-client'
 
 import Contacts from '../components/Contacts';
 import Welcome from '../components/Welcome';
 import ChatContainer from '../components/ChatContainer';
+import { IoMdAdd } from 'react-icons/io';
 
 function Chat() {
+    const socket = useRef();
     const navigate = useNavigate();
     const [contacts, setContacts] = useState([]);
     const [currentUser, setCurrentUser] = useState(undefined);
@@ -39,6 +42,13 @@ function Chat() {
             }
         })();
     }, [currentUser]);
+
+    useEffect(() => {
+        if(currentUser) {
+            socket.current = io(host);
+            socket.current.emit('add-user', currentUser._id);
+        }
+    }, [currentUser])
 
     const handleChatChange = (chat) => {
         setCurrentChat(chat);

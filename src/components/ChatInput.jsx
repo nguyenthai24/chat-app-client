@@ -53,11 +53,14 @@ function ChatInput({ handleSendMsg }) {
 
 const Container = styled.div`
     display: grid;
-    grid-template-columns: 5% 95%;
     align-items: center;
-    background-color: #180718;
-    padding: 0.2rem;
-    padding-bottom: 0.3rem;
+    grid-template-columns: 5% 95%;
+    background-color: #080420;
+    padding: 0 2rem;
+    @media screen and (min-width: 720px) and (max-width: 1080px) {
+        padding: 0 1rem;
+        gap: 1rem;
+    }
     .button-container {
         display: flex;
         align-items: center;
