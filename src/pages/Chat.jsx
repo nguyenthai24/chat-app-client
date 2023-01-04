@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { allUserRoute, host } from '../utils/API_router';
-import {io} from 'socket.io-client'
+import { io } from 'socket.io-client';
 
 import Contacts from '../components/Contacts';
 import Welcome from '../components/Welcome';
@@ -44,11 +44,11 @@ function Chat() {
     }, [currentUser]);
 
     useEffect(() => {
-        if(currentUser) {
+        if (currentUser) {
             socket.current = io(host);
             socket.current.emit('add-user', currentUser._id);
         }
-    }, [currentUser])
+    }, [currentUser]);
 
     const handleChatChange = (chat) => {
         setCurrentChat(chat);
@@ -61,7 +61,7 @@ function Chat() {
                 {isLoaded && currentChat === null ? (
                     <Welcome currentUser={currentUser} />
                 ) : (
-                    <ChatContainer currentChat={currentChat} currentUser={currentUser} />
+                    <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
                 )}
             </div>
         </Container>
